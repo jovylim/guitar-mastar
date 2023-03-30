@@ -16,6 +16,10 @@
       href="https://fonts.googleapis.com/css2?family=New+Rocker&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
     <link rel="stylesheet" href="style.css" />
     <title>guitar mastar</title>
   </head>
@@ -23,18 +27,40 @@
     <h1>guitar mastar</h1>
     <p id="welcome">
       welcome!<br />practice your chord identifying skills and become a guitar
-      mastar!<br />already a mastar? prove yourself in challenge mode....
+      mastar!<br />think you are a mastar? prove yourself in challenge
+      mode....<br /><br />
+      PICK A MODE BELOW... CHOOSE WISELY...
     </p>
-    <div class="screen">
+    <div id="screen">
       <div class="overlay-choose-mode-active" id="practice-mode">
         <span id="practice-mode">practice mode:</span><br />unlimited tries till
-        you get it right!
+        you get it right!<br /><br />just as Rome wasn't built in a day, guitars
+        aren't mastared over night...
       </div>
       <div class="overlay-choose-mode-active" id="challenge-mode">
-        <span id="challenge-mode">challenge mode:</span><br />60 seconds to test
-        your skills!
+        <span id="challenge-mode">challenge mode:</span><br />60 seconds to
+        prove you are worthy!<br /><br />get at least 10 right and be crowned
+        GUITAR MASTAR!
       </div>
       <div class="guitar-mode-active" id="guitar-area"></div>
+    </div>
+    <div id="input-area">
+      <input id="text-input" placeholder="Your answer" />
+      <input type="submit" id="submit-button" />
+    </div>
+    <div class="buttons-and-text" id="buttons-area">
+      <div class="material-symbols-rounded" id="level-1">counter_1</div>
+      <div class="material-symbols-rounded" id="level-2">counter_2</div>
+      <!-- <div class="material-symbols-rounded" id="level-3">counter_3</div> -->
+    </div>
+    <div class="buttons-and-text" id="buttons-text-area">
+      <div class="level-1-text" id="level-1">
+        level 1: from the finger pattern, identify the correct chord.
+      </div>
+      <div class="level-2-text" id="level-2">
+        level 2: from the chord, identify the correct finger pattern.
+      </div>
+      <!-- <div class="material-symbols-rounded" id="level-3">counter_3</div> -->
     </div>
 
     <script src="script.js"></script>

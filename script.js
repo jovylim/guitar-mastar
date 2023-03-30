@@ -1,12 +1,20 @@
-const chooseModeScreen = document.querySelector(".screen");
+const chooseModeScreen = document.querySelector("#screen");
 chooseModeScreen.addEventListener("click", function (e) {
   e.preventDefault();
   const modeChosen = e.target.getAttribute("id");
   if (modeChosen === "practice-mode") {
-    // run prac mode bla bla bla
-    console.log("prac mode clicked");
+    runPracticeMode();
   } else if (modeChosen === "challenge-mode") {
-    // run challenge mode bla bla bla
-    console.log("chalenge mode clicked");
+    runChallengeMode();
   }
+  document.querySelector("#practice-mode").id = "mode-choosing-inactive";
+  document.querySelector("#challenge-mode").id = "mode-choosing-inactive";
+  // activate buttons and input
 });
+
+function runPracticeMode() {
+  console.log("prac");
+}
+function runChallengeMode() {
+  console.log("chal");
+}
