@@ -1,0 +1,56 @@
+h1 {
+  font-family: "Metal Mania", cursive;
+  text-align: center;
+  font-size: 4rem;
+  margin: 0 auto;
+}
+
+#welcome {
+  font-family: "New Rocker", cursive;
+  text-align: center;
+  margin: 0 auto;
+  font-size: 1.5rem;
+}
+
+.screen {
+  display: grid;
+  height: 300px;
+  width: 600px;
+  grid-template-rows: 300px;
+  grid-template-columns: 300px 300px;
+  margin: 10px auto;
+  border: solid black 5px;
+}
+
+#practice-mode {
+  grid-area: 1/1/2/2;
+  z-index: 1;
+  background-color: paleturquoise;
+}
+
+#challenge-mode {
+  grid-area: 1/2/2/3;
+  z-index: 1;
+  background-color: lavender;
+}
+
+.overlay-choose-mode-active {
+  font-family: "New Rocker", cursive;
+  text-align: center;
+  font-size: 1.2em;
+  padding: 35% 0;
+}
+
+.overlay-choose-mode-active:hover {
+  cursor: pointer;
+}
+
+span {
+  font-family: "Metal Mania", cursive;
+  font-size: 2em;
+}
+
+#guitar-area {
+  grid-area: 1/1/2/3;
+  background-color: rebeccapurple;
+}
