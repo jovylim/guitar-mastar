@@ -42,27 +42,91 @@
         prove you are worthy!<br /><br />get at least 10 right and be crowned
         GUITAR MASTAR!
       </div>
-      <div class="guitar-mode-active" id="guitar-area"></div>
+      <div class="game-area">
+        <div class="guitar-area" id="guitar-mode-active">
+          <div class="string" id="E">
+            <div class="mute-or-open" id="mute-or-open-E"></div>
+            <div class="fret" id="E6"></div>
+            <div class="fret" id="E5"></div>
+            <div class="fret" id="E4"></div>
+            <div class="fret" id="E3"></div>
+            <div class="fret" id="E2"></div>
+            <div class="fret" id="E1"></div>
+            <div class="guitar-head" id="guitar-head-E"></div>
+            <div class="string-name" id="string-name-E"></div>
+          </div>
+          <div class="string" id="A">
+            <div class="mute-or-open" id="mute-or-open-A"></div>
+            <div class="fret" id="A6"></div>
+            <div class="fret" id="A5"></div>
+            <div class="fret" id="A4"></div>
+            <div class="fret" id="A3"></div>
+            <div class="fret" id="A2"></div>
+            <div class="fret" id="A1"></div>
+            <div class="guitar-head" id="guitar-head-A"></div>
+            <div class="string-name" id="string-name-A"></div>
+          </div>
+          <div class="string" id="D">
+            <div class="mute-or-open" id="mute-or-open-D"></div>
+            <div class="fret" id="D6"></div>
+            <div class="fret" id="D5"></div>
+            <div class="fret" id="D4"></div>
+            <div class="fret" id="D3"></div>
+            <div class="fret" id="D2"></div>
+            <div class="fret" id="D1"></div>
+            <div class="guitar-head" id="guitar-head-D"></div>
+            <div class="string-name" id="string-name-D"></div>
+          </div>
+          <div class="string" id="G">
+            <div class="mute-or-open" id="mute-or-open-G"></div>
+            <div class="fret" id="G6"></div>
+            <div class="fret" id="G5"></div>
+            <div class="fret" id="G4"></div>
+            <div class="fret" id="G3"></div>
+            <div class="fret" id="G2"></div>
+            <div class="fret" id="G1"></div>
+            <div class="guitar-head" id="guitar-head-G"></div>
+            <div class="string-name" id="string-name-G"></div>
+          </div>
+          <div class="string" id="B">
+            <div class="mute-or-open" id="mute-or-open-B"></div>
+            <div class="fret" id="B6"></div>
+            <div class="fret" id="B5"></div>
+            <div class="fret" id="B4"></div>
+            <div class="fret" id="B3"></div>
+            <div class="fret" id="B2"></div>
+            <div class="fret" id="B1"></div>
+            <div class="guitar-head" id="guitar-head-B"></div>
+            <div class="string-name" id="string-name-B"></div>
+          </div>
+          <div class="string" id="E2">
+            <div class="mute-or-open" id="mute-or-open-E2"></div>
+            <div class="fret" id="E2-6"></div>
+            <div class="fret" id="E2-5"></div>
+            <div class="fret" id="E2-4"></div>
+            <div class="fret" id="E2-3"></div>
+            <div class="fret" id="E2-2"></div>
+            <div class="fret" id="E2-1"></div>
+            <div class="guitar-head" id="guitar-head-E2"></div>
+            <div class="string-name" id="string-name-E2"></div>
+          </div>
+        </div>
+      </div>
     </div>
     <div id="input-area">
-      <input id="text-input" placeholder="Your answer" />
-      <input type="submit" id="submit-button" />
+      <input id="text-input-hidden" placeholder="Your answer" />
+      <input type="submit" id="submit-button-hidden" />
     </div>
     <div class="buttons-and-text" id="buttons-area">
-      <div class="material-symbols-rounded" id="level-1">counter_1</div>
-      <div class="material-symbols-rounded" id="level-2">counter_2</div>
+      <div class="material-symbols-rounded-hidden" id="level-1">counter_1</div>
+      <div class="material-symbols-rounded-hidden" id="level-2">counter_2</div>
       <!-- <div class="material-symbols-rounded" id="level-3">counter_3</div> -->
     </div>
-    <div class="buttons-and-text" id="buttons-text-area">
-      <div class="level-1-text" id="level-1">
-        level 1: from the finger pattern, identify the correct chord.
-      </div>
-      <div class="level-2-text" id="level-2">
-        level 2: from the chord, identify the correct finger pattern.
-      </div>
-      <!-- <div class="material-symbols-rounded" id="level-3">counter_3</div> -->
+    <div class="level-text-hidden">
+      choose your difficulty level above<br />level 1: from the finger pattern,
+      identify the correct chord.<br />level 2: from the chord, identify the
+      correct finger pattern.
     </div>
-
     <script src="script.js"></script>
   </body>
 </html>

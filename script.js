@@ -9,7 +9,15 @@ chooseModeScreen.addEventListener("click", function (e) {
   }
   document.querySelector("#practice-mode").id = "mode-choosing-inactive";
   document.querySelector("#challenge-mode").id = "mode-choosing-inactive";
-  // activate buttons and input
+  document.querySelector(".level-text-hidden").className = "level-text";
+  document.querySelector("#text-input-hidden").id = "text-input";
+  document.querySelector("#submit-button-hidden").id = "submit-button";
+
+  for (let button of document.querySelectorAll(
+    ".material-symbols-rounded-hidden"
+  )) {
+    button.className = "material-symbols-rounded";
+  }
 });
 
 function runPracticeMode() {
