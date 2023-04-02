@@ -43,72 +43,96 @@
         GUITAR MASTAR!
       </div>
       <div class="game-area">
-        <div class="guitar-area" id="guitar-mode-active">
-          <div class="string" id="E">
-            <div class="mute-or-open" id="mute-or-open-E"></div>
-            <div class="fret" id="E6"></div>
-            <div class="fret" id="E5"></div>
-            <div class="fret" id="E4"></div>
-            <div class="fret" id="E3"></div>
-            <div class="fret" id="E2"></div>
-            <div class="fret" id="E1"></div>
-            <div class="guitar-head" id="guitar-head-E"></div>
-            <div class="string-name" id="string-name-E"></div>
+        <div class="interactive-area">
+          <div class="mute-or-open">
+            <div id="mute-or-open-E"></div>
+            <div id="mute-or-open-A"></div>
+            <div id="mute-or-open-D"></div>
+            <div id="mute-or-open-G"></div>
+            <div id="mute-or-open-B"></div>
+            <div id="mute-or-open-E2"></div>
           </div>
-          <div class="string" id="A">
-            <div class="mute-or-open" id="mute-or-open-A"></div>
-            <div class="fret" id="A6"></div>
-            <div class="fret" id="A5"></div>
-            <div class="fret" id="A4"></div>
-            <div class="fret" id="A3"></div>
-            <div class="fret" id="A2"></div>
-            <div class="fret" id="A1"></div>
-            <div class="guitar-head" id="guitar-head-A"></div>
-            <div class="string-name" id="string-name-A"></div>
+          <div class="guitar-area">
+            <div class="string" id="E-string">
+              <div class="fret" id="E6"></div>
+              <div class="fret" id="E5"></div>
+              <div class="fret" id="E4"></div>
+              <div class="fret" id="E3"></div>
+              <div class="fret" id="E2"></div>
+              <div class="fret" id="E1"></div>
+              <div class="guitar-head" id="guitar-head-E"></div>
+            </div>
+            <div class="string" id="A-string">
+              <div class="fret" id="A6"><div class="string-colour"></div></div>
+              <div class="fret" id="A5"></div>
+              <div class="fret" id="A4"></div>
+              <div class="fret" id="A3"></div>
+              <div class="fret" id="A2"></div>
+              <div class="fret" id="A1"></div>
+              <div class="guitar-head" id="guitar-head-A"></div>
+            </div>
+            <div class="string" id="D-string">
+              <div class="fret" id="D6"></div>
+              <div class="fret" id="D5">
+                <div class="Drow1"></div>
+                <div class="Drow2"></div>
+                <div class="Drow3">
+                  <div class="col1"></div>
+                  <div class="fret-mark"></div>
+                  <div class="col3"></div>
+                  <div class="col4"></div>
+                </div>
+              </div>
+              <div class="fret" id="D4"></div>
+              <div class="fret" id="D3">
+                <div class="Drow1"></div>
+                <div class="Drow2"></div>
+                <div class="Drow3">
+                  <div class="col1"></div>
+                  <div class="fret-mark"></div>
+                  <div class="col3"></div>
+                  <div class="col4"></div>
+                </div>
+              </div>
+              <div class="fret" id="D2"></div>
+              <div class="fret" id="D1"></div>
+              <div class="guitar-head" id="guitar-head-D"></div>
+            </div>
+            <div class="string" id="G-string">
+              <div class="fret" id="G6"></div>
+              <div class="fret" id="G5"></div>
+              <div class="fret" id="G4"></div>
+              <div class="fret" id="G3"></div>
+              <div class="fret" id="G2"></div>
+              <div class="fret" id="G1"></div>
+              <div class="guitar-head" id="guitar-head-G"></div>
+            </div>
+            <div class="string" id="B-string">
+              <div class="fret" id="B6"></div>
+              <div class="fret" id="B5"></div>
+              <div class="fret" id="B4"></div>
+              <div class="fret" id="B3"></div>
+              <div class="fret" id="B2"></div>
+              <div class="fret" id="B1"></div>
+              <div class="guitar-head" id="guitar-head-B"></div>
+            </div>
+            <div class="string" id="E2-string">
+              <div class="fret" id="E2-6"></div>
+              <div class="fret" id="E2-5"></div>
+              <div class="fret" id="E2-4"></div>
+              <div class="fret" id="E2-3"></div>
+              <div class="fret" id="E2-2"></div>
+              <div class="fret" id="E2-1"></div>
+              <div class="guitar-head" id="guitar-head-E2"></div>
+            </div>
           </div>
-          <div class="string" id="D">
-            <div class="mute-or-open" id="mute-or-open-D"></div>
-            <div class="fret" id="D6"></div>
-            <div class="fret" id="D5"></div>
-            <div class="fret" id="D4"></div>
-            <div class="fret" id="D3"></div>
-            <div class="fret" id="D2"></div>
-            <div class="fret" id="D1"></div>
-            <div class="guitar-head" id="guitar-head-D"></div>
-            <div class="string-name" id="string-name-D"></div>
-          </div>
-          <div class="string" id="G">
-            <div class="mute-or-open" id="mute-or-open-G"></div>
-            <div class="fret" id="G6"></div>
-            <div class="fret" id="G5"></div>
-            <div class="fret" id="G4"></div>
-            <div class="fret" id="G3"></div>
-            <div class="fret" id="G2"></div>
-            <div class="fret" id="G1"></div>
-            <div class="guitar-head" id="guitar-head-G"></div>
-            <div class="string-name" id="string-name-G"></div>
-          </div>
-          <div class="string" id="B">
-            <div class="mute-or-open" id="mute-or-open-B"></div>
-            <div class="fret" id="B6"></div>
-            <div class="fret" id="B5"></div>
-            <div class="fret" id="B4"></div>
-            <div class="fret" id="B3"></div>
-            <div class="fret" id="B2"></div>
-            <div class="fret" id="B1"></div>
-            <div class="guitar-head" id="guitar-head-B"></div>
-            <div class="string-name" id="string-name-B"></div>
-          </div>
-          <div class="string" id="E2">
-            <div class="mute-or-open" id="mute-or-open-E2"></div>
-            <div class="fret" id="E2-6"></div>
-            <div class="fret" id="E2-5"></div>
-            <div class="fret" id="E2-4"></div>
-            <div class="fret" id="E2-3"></div>
-            <div class="fret" id="E2-2"></div>
-            <div class="fret" id="E2-1"></div>
-            <div class="guitar-head" id="guitar-head-E2"></div>
-            <div class="string-name" id="string-name-E2"></div>
+          <div class="string-name">
+            <div id="string-name-E">E</div>
+            <div id="string-name-A">A</div>
+            <div id="string-name-D">D</div>
+            <div id="string-name-G">G</div>
+            <div id="string-name-B">B</div>
+            <div id="string-name-E2">E</div>
           </div>
         </div>
       </div>

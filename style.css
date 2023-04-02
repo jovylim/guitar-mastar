@@ -1,7 +1,7 @@
 h1 {
   font-family: "Metal Mania", cursive;
   text-align: center;
-  font-size: 4rem;
+  font-size: 3rem;
   margin: 0 auto;
 }
 
@@ -9,7 +9,7 @@ h1 {
   font-family: "New Rocker", cursive;
   text-align: center;
   margin: 0 auto;
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
 #screen {
@@ -120,15 +120,189 @@ span {
   background-color: white;
 }
 
-.guitar-area {
+.interactive-area {
   display: grid;
   height: 180px;
   width: 500px;
-  grid-template-rows: repeat(6, 30px);
+  grid-template-columns: 40px 440px 20px;
   margin: 60px auto;
+}
+
+.mute-or-open {
+  display: grid;
+  grid-template-rows: repeat(6, 30px);
+}
+
+.guitar-area {
+  display: grid;
+  grid-template-rows: repeat(6, 30px);
+  background-image: url("wood.jpeg");
 }
 
 .string {
   display: grid;
-  grid-template-columns: 40px 60px 60px 60px 60px 60px 60px 80px 20px;
+  grid-template-columns: 60px 60px 60px 60px 60px 60px 80px;
+}
+
+#E-string:before {
+  content: "";
+  width: 381px;
+  height: 10px;
+  background: linear-gradient(#eee, #999);
+  z-index: 2;
+  position: absolute;
+  margin-top: 10px;
+}
+
+#guitar-head-E:before {
+  content: "";
+  width: 60.5px;
+  height: 10px;
+  background: linear-gradient(#eee, #999);
+  z-index: 3;
+  position: absolute;
+  margin-top: 10px;
+  transform: rotate(-6deg) translateY(-3px);
+}
+
+#A-string:before {
+  content: "";
+  width: 381px;
+  height: 9px;
+  background: linear-gradient(#eee, #999);
+  z-index: 2;
+  position: absolute;
+  margin-top: 10.5px;
+}
+
+#guitar-head-A:before {
+  content: "";
+  width: 60.5px;
+  height: 9px;
+  background: linear-gradient(#eee, #999);
+  z-index: 3;
+  position: absolute;
+  margin-top: 10.5px;
+  transform: rotate(-6deg) translateY(-3px);
+}
+
+#D-string:before {
+  content: "";
+  width: 381px;
+  height: 8px;
+  background: linear-gradient(#eee, #999);
+  z-index: 2;
+  position: absolute;
+  margin-top: 11px;
+}
+
+#guitar-head-D:before {
+  content: "";
+  width: 60.5px;
+  height: 8px;
+  background: linear-gradient(#eee, #999);
+  z-index: 3;
+  position: absolute;
+  margin-top: 11px;
+  transform: rotate(-6deg) translateY(-3px);
+}
+
+#G-string:before {
+  content: "";
+  width: 381px;
+  height: 7px;
+  background: linear-gradient(#eee, #999);
+  z-index: 2;
+  position: absolute;
+  margin-top: 11.5px;
+}
+
+#guitar-head-G:before {
+  content: "";
+  width: 60.5px;
+  height: 7px;
+  background: linear-gradient(#eee, #999);
+  z-index: 3;
+  position: absolute;
+  margin-top: 11.5px;
+  transform: rotate(6deg) translateY(3px);
+}
+
+#B-string:before {
+  content: "";
+  width: 381px;
+  height: 5px;
+  background: linear-gradient(#eee, #999);
+  z-index: 2;
+  position: absolute;
+  margin-top: 12.5px;
+}
+
+#guitar-head-B:before {
+  content: "";
+  width: 60.5px;
+  height: 5px;
+  background: linear-gradient(#eee, #999);
+  z-index: 3;
+  position: absolute;
+  margin-top: 12.5px;
+  transform: rotate(6deg) translateY(3px);
+}
+
+#E2-string:before {
+  content: "";
+  width: 381px;
+  height: 4px;
+  background: linear-gradient(#eee, #999);
+  z-index: 2;
+  position: absolute;
+  margin-top: 13px;
+}
+
+#guitar-head-E2:before {
+  content: "";
+  width: 60.5px;
+  height: 4px;
+  background: linear-gradient(#eee, #999);
+  z-index: 3;
+  position: absolute;
+  margin-top: 13px;
+  transform: rotate(6deg) translateY(3px);
+}
+
+.string-name {
+  display: grid;
+  grid-template-rows: repeat(6, 30px);
+  font-family: "Metal Mania", cursive;
+  text-align: center;
+}
+
+.fret {
+  border-left: 10px solid black;
+  border-image: linear-gradient(to left, #777, #bbb, #777) 1 100%;
+}
+
+.guitar-head {
+  border-left: 20px solid;
+  border-image: linear-gradient(to left, #777, #bbb, #777) 1 100%;
+}
+
+#D3 {
+  display: grid;
+  grid-template-rows: repeat(3, 10px);
+}
+
+#D5 {
+  display: grid;
+  grid-template-rows: repeat(3, 10px);
+}
+
+.Drow3 {
+  display: grid;
+  grid-template-columns: 15px 20px 15px 10px;
+}
+
+.fret-mark {
+  border: 10px solid rgba(27, 16, 16, 0.542);
+  border-radius: 100%;
 }
