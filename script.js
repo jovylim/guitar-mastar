@@ -1,4 +1,5 @@
 let inGame = false;
+let currMode = "";
 let currLevel = 1; // default level is 1
 const stringNames = ["E", "A", "D", "G", "B", "E2"];
 const chordCollection = [
@@ -23,11 +24,16 @@ const chordCollection = [
     notes: ["A2", "D2"],
   },
 ];
+let randomChord = 0;
+let currentChord = chordCollection[randomChord];
+
+////////// event listeners
 
 const chooseModeScreen = document.querySelector("#screen");
 chooseModeScreen.addEventListener("click", function (e) {
   e.preventDefault();
   const modeChosen = e.target.getAttribute("id");
+  currMode = modeChosen;
 
   if (!inGame) {
     document.querySelector("#practice-mode").id =
@@ -56,7 +62,6 @@ chooseModeScreen.addEventListener("click", function (e) {
 const guitarArea = document.querySelector(".guitar-area");
 guitarArea.addEventListener("click", function (e) {
   let fretID = e.target.getAttribute("id");
-  console.log(fretID);
 });
 
 const changeModeButton = document.querySelector("#choose-mode-button");
@@ -64,24 +69,57 @@ changeModeButton.addEventListener("click", function (e) {
   backToModeScreen();
 });
 
+const submitButton = document.querySelector(".submit-button");
+let userAns = "";
+submitButton.addEventListener("click", function (e) {
+  e.preventDefault();
+  userAns = document.querySelector("#text-input").value;
+  checkAns();
+});
+
+const level1Button = document.querySelector("#level-1");
+level1Button.addEventListener("click", function (e) {
+  e.preventDefault();
+  clearFretboard();
+  currLevel = 1;
+  if (currMode === "practice-mode") {
+    runPracticeMode();
+  } else if (currMode === "challenge-mode") {
+    runChallengeMode();
+  }
+});
+
+const level2Button = document.querySelector("#level-2");
+level2Button.addEventListener("click", function (e) {
+  e.preventDefault();
+  clearFretboard();
+  currLevel = 2;
+  if (currMode === "practice-mode") {
+    runPracticeMode();
+  } else if (currMode === "challenge-mode") {
+    runChallengeMode();
+  }
+});
+
+///////////fns
+
 function runPracticeMode() {
   document.querySelector(".current-game-mode").innerHTML =
     "Current Game Mode: Practice";
   if (currLevel === 1) {
-    for (i = 0; i < 10; i++) {
-      levelOnePracMode();
-    }
-    hideInputArea();
-    document.querySelector(".wrong").innerHTML =
-      "you have practiced long enough... advance to level 2?";
+    levelOnePracMode();
+
+    // hideInputArea();
+    // document.querySelector(".wrong").innerHTML =
+    //   "you have practiced long enough... advance to level 2?";
   } else if (currLevel === 2) {
     levelTwoPracMode();
   }
 }
 
 function levelOnePracMode() {
-  let randomChord = Math.floor(Math.random() * chordCollection.length);
-  const currentChord = chordCollection[randomChord];
+  randomChord = Math.floor(Math.random() * chordCollection.length);
+  currentChord = chordCollection[randomChord];
   for (i = 0; i < 6; i++) {
     document.querySelector(`#mute-or-open-${stringNames[i]}`).innerHTML =
       currentChord.strings[i];
@@ -89,22 +127,21 @@ function levelOnePracMode() {
   for (x of currentChord.notes) {
     document.querySelector(`#${x}`).innerHTML = "O";
   }
-  const submitButton = document.querySelector("#submit-button");
-  submitButton.addEventListener("click", function (e) {
-    let userAns = document.querySelector("#text-input").value;
+}
 
-    if (userAns === currentChord.name) {
-      for (x of currentChord.notes) {
-        document.querySelector(`#${x}`).innerHTML = "";
-      }
-      document.querySelector("#text-input").value = "";
-      document.querySelector(".wrong").innerHTML = "correct! next one...";
-      return true;
-    } else {
-      document.querySelector(".wrong").innerHTML =
-        "wrong! try again! ps: this is a caps sensitive game";
+function checkAns() {
+  if (userAns === currentChord.name) {
+    for (x of currentChord.notes) {
+      document.querySelector(`#${x}`).innerHTML = "";
     }
-  });
+    document.querySelector("#text-input").value = "";
+    document.querySelector(".wrong").innerHTML = "correct! next one...";
+    runPracticeMode();
+  } else {
+    document.querySelector(".wrong").innerHTML =
+      "wrong! try again! ps: this is a caps sensitive game";
+    document.querySelector("#text-input").value = "";
+  }
 }
 
 function levelTwoPracMode() {}
@@ -131,9 +168,18 @@ function backToModeScreen() {
 
 function hideInputArea() {
   document.querySelector(".level-text").className = "level-text-hidden";
+  document.querySelector("#text-input").value = "";
   document.querySelector("#text-input").id = "text-input-hidden";
   document.querySelector("#submit-button").id = "submit-button-hidden";
+  document.querySelector(".wrong").innerHTML = "";
   for (let button of document.querySelectorAll(".material-symbols-rounded")) {
     button.className = "material-symbols-rounded-hidden";
+  }
+  clearFretboard();
+}
+
+function clearFretboard() {
+  for (let fret of document.querySelectorAll(".fret")) {
+    fret.innerHTML = "";
   }
 }
