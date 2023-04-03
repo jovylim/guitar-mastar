@@ -10,10 +10,12 @@
       href="https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap"
       rel="stylesheet"
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=New+Rocker&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@900&display=swap"
       rel="stylesheet"
     />
     <link
@@ -43,14 +45,19 @@
         GUITAR MASTAR!
       </div>
       <div class="game-area">
+        <p class="current-game-mode"></p>
+        <p class="current-game-level">
+          Current Game Level: Level 1 (from the finger pattern, identify the
+          correct chord.)
+        </p>
         <div class="interactive-area">
           <div class="mute-or-open">
-            <div id="mute-or-open-E"></div>
-            <div id="mute-or-open-A"></div>
-            <div id="mute-or-open-D"></div>
-            <div id="mute-or-open-G"></div>
-            <div id="mute-or-open-B"></div>
-            <div id="mute-or-open-E2"></div>
+            <div class="xo" id="mute-or-open-E"></div>
+            <div class="xo" id="mute-or-open-A"></div>
+            <div class="xo" id="mute-or-open-D"></div>
+            <div class="xo" id="mute-or-open-G"></div>
+            <div class="xo" id="mute-or-open-B"></div>
+            <div class="xo" id="mute-or-open-E2"></div>
           </div>
           <div class="guitar-area">
             <div class="string" id="E-string">
@@ -63,7 +70,7 @@
               <div class="guitar-head" id="guitar-head-E"></div>
             </div>
             <div class="string" id="A-string">
-              <div class="fret" id="A6"><div class="string-colour"></div></div>
+              <div class="fret" id="A6"></div>
               <div class="fret" id="A5"></div>
               <div class="fret" id="A4"></div>
               <div class="fret" id="A3"></div>
@@ -73,27 +80,9 @@
             </div>
             <div class="string" id="D-string">
               <div class="fret" id="D6"></div>
-              <div class="fret" id="D5">
-                <div class="Drow1"></div>
-                <div class="Drow2"></div>
-                <div class="Drow3">
-                  <div class="col1"></div>
-                  <div class="fret-mark"></div>
-                  <div class="col3"></div>
-                  <div class="col4"></div>
-                </div>
-              </div>
+              <div class="fret" id="D5"></div>
               <div class="fret" id="D4"></div>
-              <div class="fret" id="D3">
-                <div class="Drow1"></div>
-                <div class="Drow2"></div>
-                <div class="Drow3">
-                  <div class="col1"></div>
-                  <div class="fret-mark"></div>
-                  <div class="col3"></div>
-                  <div class="col4"></div>
-                </div>
-              </div>
+              <div class="fret" id="D3"></div>
               <div class="fret" id="D2"></div>
               <div class="fret" id="D1"></div>
               <div class="guitar-head" id="guitar-head-D"></div>
@@ -127,26 +116,37 @@
             </div>
           </div>
           <div class="string-name">
-            <div id="string-name-E">E</div>
-            <div id="string-name-A">A</div>
-            <div id="string-name-D">D</div>
-            <div id="string-name-G">G</div>
-            <div id="string-name-B">B</div>
-            <div id="string-name-E2">E</div>
+            <div class="string-name-text" id="string-name-E">E</div>
+            <div class="string-name-text" id="string-name-A">A</div>
+            <div class="string-name-text" id="string-name-D">D</div>
+            <div class="string-name-text" id="string-name-G">G</div>
+            <div class="string-name-text" id="string-name-B">B</div>
+            <div class="string-name-text" id="string-name-E2">E</div>
           </div>
+        </div>
+        <div class="score-identify-time">
+          <p class="score"></p>
+          <p class="time"></p>
         </div>
       </div>
     </div>
     <div id="input-area">
+      <p class="wrong-hidden">wrong! try again! ps: caps sensitive game</p>
+      <p class="identify-hidden">Identify: G</p>
       <input id="text-input-hidden" placeholder="Your answer" />
+
       <input type="submit" id="submit-button-hidden" />
     </div>
     <div class="buttons-and-text" id="buttons-area">
       <div class="material-symbols-rounded-hidden" id="level-1">counter_1</div>
       <div class="material-symbols-rounded-hidden" id="level-2">counter_2</div>
       <!-- <div class="material-symbols-rounded" id="level-3">counter_3</div> -->
+      <div class="material-symbols-rounded-hidden" id="choose-mode-button">
+        change_circle
+      </div>
     </div>
     <div class="level-text-hidden">
+      level 1 level 2 change mode<br />
       choose your difficulty level above<br />level 1: from the finger pattern,
       identify the correct chord.<br />level 2: from the chord, identify the
       correct finger pattern.

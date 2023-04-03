@@ -36,7 +36,12 @@ h1 {
   color: white;
 }
 
-#mode-choosing-inactive {
+#practice-mode-choosing-inactive {
+  grid-area: 1/1/1/1;
+  z-index: -1;
+}
+
+#challenge-mode-choosing-inactive {
   grid-area: 1/1/1/1;
   z-index: -1;
 }
@@ -62,9 +67,21 @@ span {
   margin: 20px;
 }
 
+.wrong-hidden {
+  font-size: 0px;
+}
+
+.wrong {
+  font-family: "New Rocker", cursive;
+}
+
 #text-input-hidden {
   font-size: 0px;
   border-width: 0px;
+}
+
+.identify-hidden {
+  font-size: 0px;
 }
 
 #submit-button-hidden {
@@ -79,6 +96,11 @@ span {
   border: solid black 3px;
   border-radius: 5px;
   font-family: "New Rocker", cursive;
+}
+
+.identify {
+  font-family: "New Rocker", cursive;
+  font-size: 1.5rem;
 }
 
 #submit-button {
@@ -120,154 +142,63 @@ span {
   background-color: white;
 }
 
+.current-game-mode {
+  font-family: "New Rocker", cursive;
+  margin: 0 auto;
+  padding: 2px 10px 5px 10px;
+}
+
+.current-game-level {
+  font-family: "New Rocker", cursive;
+  margin: 0 auto;
+  padding: 2px 10px 15px 10px;
+}
+
+.score {
+  font-family: "New Rocker", cursive;
+  font-size: 1.5rem;
+  display: inline-block;
+  padding-left: 10px;
+}
+
+.time {
+  font-family: "New Rocker", cursive;
+  font-size: 1.5rem;
+  display: inline-block;
+  float: right;
+  padding-right: 10px;
+}
+
 .interactive-area {
   display: grid;
   height: 180px;
   width: 500px;
   grid-template-columns: 40px 440px 20px;
-  margin: 60px auto;
+  /* margin: 60px auto; */
+  margin: 0 auto;
 }
 
 .mute-or-open {
   display: grid;
   grid-template-rows: repeat(6, 30px);
+  font-family: "Metal Mania", cursive;
+}
+
+.xo {
+  text-align: center;
+  padding: 20% 0;
 }
 
 .guitar-area {
   display: grid;
   grid-template-rows: repeat(6, 30px);
-  background-image: url("wood.jpeg");
+  background-image: url("bg.png");
+  background-size: cover;
 }
 
 .string {
   display: grid;
   grid-template-columns: 60px 60px 60px 60px 60px 60px 80px;
-}
-
-#E-string:before {
-  content: "";
-  width: 381px;
-  height: 10px;
-  background: linear-gradient(#eee, #999);
-  z-index: 2;
-  position: absolute;
-  margin-top: 10px;
-}
-
-#guitar-head-E:before {
-  content: "";
-  width: 60.5px;
-  height: 10px;
-  background: linear-gradient(#eee, #999);
-  z-index: 3;
-  position: absolute;
-  margin-top: 10px;
-  transform: rotate(-6deg) translateY(-3px);
-}
-
-#A-string:before {
-  content: "";
-  width: 381px;
-  height: 9px;
-  background: linear-gradient(#eee, #999);
-  z-index: 2;
-  position: absolute;
-  margin-top: 10.5px;
-}
-
-#guitar-head-A:before {
-  content: "";
-  width: 60.5px;
-  height: 9px;
-  background: linear-gradient(#eee, #999);
-  z-index: 3;
-  position: absolute;
-  margin-top: 10.5px;
-  transform: rotate(-6deg) translateY(-3px);
-}
-
-#D-string:before {
-  content: "";
-  width: 381px;
-  height: 8px;
-  background: linear-gradient(#eee, #999);
-  z-index: 2;
-  position: absolute;
-  margin-top: 11px;
-}
-
-#guitar-head-D:before {
-  content: "";
-  width: 60.5px;
-  height: 8px;
-  background: linear-gradient(#eee, #999);
-  z-index: 3;
-  position: absolute;
-  margin-top: 11px;
-  transform: rotate(-6deg) translateY(-3px);
-}
-
-#G-string:before {
-  content: "";
-  width: 381px;
-  height: 7px;
-  background: linear-gradient(#eee, #999);
-  z-index: 2;
-  position: absolute;
-  margin-top: 11.5px;
-}
-
-#guitar-head-G:before {
-  content: "";
-  width: 60.5px;
-  height: 7px;
-  background: linear-gradient(#eee, #999);
-  z-index: 3;
-  position: absolute;
-  margin-top: 11.5px;
-  transform: rotate(6deg) translateY(3px);
-}
-
-#B-string:before {
-  content: "";
-  width: 381px;
-  height: 5px;
-  background: linear-gradient(#eee, #999);
-  z-index: 2;
-  position: absolute;
-  margin-top: 12.5px;
-}
-
-#guitar-head-B:before {
-  content: "";
-  width: 60.5px;
-  height: 5px;
-  background: linear-gradient(#eee, #999);
-  z-index: 3;
-  position: absolute;
-  margin-top: 12.5px;
-  transform: rotate(6deg) translateY(3px);
-}
-
-#E2-string:before {
-  content: "";
-  width: 381px;
-  height: 4px;
-  background: linear-gradient(#eee, #999);
-  z-index: 2;
-  position: absolute;
-  margin-top: 13px;
-}
-
-#guitar-head-E2:before {
-  content: "";
-  width: 60.5px;
-  height: 4px;
-  background: linear-gradient(#eee, #999);
-  z-index: 3;
-  position: absolute;
-  margin-top: 13px;
-  transform: rotate(6deg) translateY(3px);
 }
 
 .string-name {
@@ -277,32 +208,20 @@ span {
   text-align: center;
 }
 
+.string-name-text {
+  padding: 40% 0;
+}
+
+/* .fret:hover {
+  cursor: pointer;
+} */
+
+.material-symbols-rounded:hover {
+  cursor: pointer;
+}
+
 .fret {
-  border-left: 10px solid black;
-  border-image: linear-gradient(to left, #777, #bbb, #777) 1 100%;
-}
-
-.guitar-head {
-  border-left: 20px solid;
-  border-image: linear-gradient(to left, #777, #bbb, #777) 1 100%;
-}
-
-#D3 {
-  display: grid;
-  grid-template-rows: repeat(3, 10px);
-}
-
-#D5 {
-  display: grid;
-  grid-template-rows: repeat(3, 10px);
-}
-
-.Drow3 {
-  display: grid;
-  grid-template-columns: 15px 20px 15px 10px;
-}
-
-.fret-mark {
-  border: 10px solid rgba(27, 16, 16, 0.542);
-  border-radius: 100%;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-size: 1.5em;
+  text-align: center;
 }
