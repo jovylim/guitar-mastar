@@ -68,7 +68,12 @@ function runPracticeMode() {
   document.querySelector(".current-game-mode").innerHTML =
     "Current Game Mode: Practice";
   if (currLevel === 1) {
-    levelOnePracMode();
+    for (i = 0; i < 10; i++) {
+      levelOnePracMode();
+    }
+    hideInputArea();
+    document.querySelector(".wrong").innerHTML =
+      "you have practiced long enough... advance to level 2?";
   } else if (currLevel === 2) {
     levelTwoPracMode();
   }
@@ -85,26 +90,19 @@ function levelOnePracMode() {
     document.querySelector(`#${x}`).innerHTML = "O";
   }
   const submitButton = document.querySelector("#submit-button");
-  let wrong = false;
   submitButton.addEventListener("click", function (e) {
     let userAns = document.querySelector("#text-input").value;
 
     if (userAns === currentChord.name) {
-      console.log("correcto");
       for (x of currentChord.notes) {
         document.querySelector(`#${x}`).innerHTML = "";
       }
       document.querySelector("#text-input").value = "";
-      if (wrong) {
-        document.querySelector(".wrong").className = "wrong-hidden";
-        wrong = false;
-      }
-      levelOnePracMode();
+      document.querySelector(".wrong").innerHTML = "correct! next one...";
+      return true;
     } else {
-      if (!wrong) {
-        document.querySelector(".wrong-hidden").className = "wrong";
-        wrong = true;
-      }
+      document.querySelector(".wrong").innerHTML =
+        "wrong! try again! ps: this is a caps sensitive game";
     }
   });
 }
@@ -128,6 +126,10 @@ function backToModeScreen() {
     "practice-mode";
   document.querySelector("#challenge-mode-choosing-inactive").id =
     "challenge-mode";
+  hideInputArea();
+}
+
+function hideInputArea() {
   document.querySelector(".level-text").className = "level-text-hidden";
   document.querySelector("#text-input").id = "text-input-hidden";
   document.querySelector("#submit-button").id = "submit-button-hidden";
