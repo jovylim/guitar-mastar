@@ -6,6 +6,7 @@ let userAnsL2 = [];
 let randomChord = 0;
 let currentChord = {};
 let currentScore = 0;
+let currentQnNum = 1;
 const stringNames = ["E", "A", "D", "G", "B", "E2"];
 const chordCollection = [
   {
@@ -48,7 +49,7 @@ chooseModeScreen.addEventListener("click", function (e) {
       "practice-mode-choosing-inactive";
     document.querySelector("#challenge-mode").id =
       "challenge-mode-choosing-inactive";
-    document.querySelector(".level-text-hidden").className = "level-text";
+    // document.querySelector(".level-text-hidden").className = "level-text";
     document.querySelector("#text-input-hidden").id = "text-input";
     document.querySelector("#level1-submit-button-hidden").id =
       "level1-submit-button";
@@ -123,9 +124,14 @@ const level1Button = document.querySelector("#level-1");
 level1Button.addEventListener("click", function (e) {
   e.preventDefault();
   clearFretboard();
-  hideInputAreaDepending();
-  currLevel = 1;
-  showInputAreaDepending();
+  if (currLevel !== 1 && currentQnNum !== 11) {
+    hideInputAreaDepending();
+  }
+  if (currLevel !== 1) {
+    currLevel = 1;
+    showInputAreaDepending();
+  }
+  document.querySelector(".wrong").innerHTML = "";
   document.querySelector(".current-game-level").innerHTML =
     "Current Level: Level 1 (from the finger pattern, identify the correct chord.)";
   if (currMode === "practice-mode") {
@@ -140,9 +146,14 @@ level2Button.addEventListener("click", function (e) {
   e.preventDefault();
   clearFretboard();
   clearOpenMute();
-  hideInputAreaDepending();
-  currLevel = 2;
-  showInputAreaDepending();
+  if (currLevel !== 2 && currentQnNum !== 11) {
+    hideInputAreaDepending();
+  }
+  if (currLevel !== 2) {
+    currLevel = 2;
+    showInputAreaDepending();
+  }
+  document.querySelector(".wrong").innerHTML = "";
   userAnsL2 = [];
   document.querySelector(".current-game-level").innerHTML =
     "Current Level: Level 2 (from the given chord, identify the correct finger pattern.)";
@@ -169,8 +180,9 @@ function runChallengeMode() {
   document.querySelector(".current-game-mode").innerHTML =
     "Current Game Mode: Challenge<br />";
   currentScore = 0;
+  currentQnNum = 1;
   document.querySelector(".score").innerHTML = `Current Score: ${currentScore}`;
-  document.querySelector(".time").innerHTML = "Time Left: 60";
+  document.querySelector(".qn-num").innerHTML = `Qn No: ${currentQnNum}/10`;
   if (currLevel === 1) {
     levelOneMode();
   } else if (currLevel === 2) {
@@ -213,8 +225,19 @@ function checkAnsL1() {
       document.querySelector(
         ".score"
       ).innerHTML = `Current Score: ${currentScore}`;
+      currentQnNum += 1;
+      if (currentQnNum === 11) {
+        console.log("show res L1 q10 right");
+        showResults();
+      } else {
+        document.querySelector(
+          ".qn-num"
+        ).innerHTML = `Qn No: ${currentQnNum}/10`;
+        levelOneMode();
+      }
+    } else {
+      levelOneMode();
     }
-    levelOneMode();
   } else {
     if (currMode === "challenge-mode") {
       document.querySelector(".wrong").innerHTML = "wrong! next qn!";
@@ -222,7 +245,17 @@ function checkAnsL1() {
         document.querySelector(`#${x}`).innerHTML = "";
       }
       document.querySelector("#text-input").value = "";
-      levelOneMode();
+      currentQnNum += 1;
+
+      if (currentQnNum === 11) {
+        console.log("show res L1 q10 wrong");
+        showResults();
+      } else {
+        document.querySelector(
+          ".qn-num"
+        ).innerHTML = `Qn No: ${currentQnNum}/10`;
+        levelOneMode();
+      }
     } else {
       document.querySelector(".wrong").innerHTML =
         "wrong! try again! ps: this is a caps sensitive game";
@@ -269,12 +302,32 @@ function checkAnsL2() {
       document.querySelector(
         ".score"
       ).innerHTML = `Current Score: ${currentScore}`;
+      currentQnNum += 1;
+      if (currentQnNum === 11) {
+        console.log("show res L2 q10 right");
+        showResults();
+      } else {
+        document.querySelector(
+          ".qn-num"
+        ).innerHTML = `Qn No: ${currentQnNum}/10`;
+        levelTwoMode();
+      }
+    } else {
+      levelTwoMode();
     }
-    levelTwoMode();
   } else {
     if (currMode === "challenge-mode") {
       document.querySelector(".wrong").innerHTML = "wrong! next qn!";
-      levelTwoMode();
+      currentQnNum += 1;
+      if (currentQnNum === 11) {
+        console.log("show res L2 q10 wrong");
+        showResults();
+      } else {
+        document.querySelector(
+          ".qn-num"
+        ).innerHTML = `Qn No: ${currentQnNum}/10`;
+        levelTwoMode();
+      }
     } else {
       document.querySelector(".wrong").innerHTML =
         "wrong! try again! ps: did you indicate the X O of the strings?";
@@ -282,8 +335,17 @@ function checkAnsL2() {
   }
 }
 
-function newChallengeGame() {
-  //reset scores and timer
+function showResults() {
+  // document.querySelector("#results-hidden").id = "results";
+  hideInputAreaDepending();
+  if (currentScore === 10) {
+    document.querySelector(".wrong").innerHTML =
+      "Score: 10/10<br />WOW! Perfect score! you are indeed a guitar mastar!<br />use the buttons below to change level or go back to home...";
+  } else {
+    document.querySelector(
+      ".wrong"
+    ).innerHTML = `Score: ${currentScore}/10<br />not quite perfect yet... i think you need more practice...<br />use the buttons below to change level or go back to home...`;
+  }
 }
 
 function backToModeScreen() {
@@ -299,10 +361,10 @@ function backToModeScreen() {
 }
 
 function hideInputArea() {
-  document.querySelector(".level-text").className = "level-text-hidden";
+  // document.querySelector(".level-text").className = "level-text-hidden";
   document.querySelector(".wrong").innerHTML = "";
   document.querySelector(".score").innerHTML = "";
-  document.querySelector(".time").innerHTML = "";
+  document.querySelector(".qn-num").innerHTML = "";
   for (let button of document.querySelectorAll(".material-symbols-rounded")) {
     button.className = "material-symbols-rounded-hidden";
   }
@@ -335,6 +397,7 @@ function hideInputAreaDepending() {
 }
 
 function showInputAreaDepending() {
+  document.querySelector(".wrong").innerHTML = "";
   if (currLevel === 1) {
     document.querySelector("#text-input-hidden").id = "text-input";
     document.querySelector("#level1-submit-button-hidden").id =

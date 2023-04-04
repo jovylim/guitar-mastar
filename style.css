@@ -140,16 +140,17 @@ span {
 .material-symbols-rounded {
   font-variation-settings: "FILL" 1, "wght" 700, "GRAD" 0, "opsz" 48;
   font-size: 3rem;
+  padding-left: 20px;
 }
 
-.level-text-hidden {
+/* .level-text-hidden {
   font-size: 0px;
 }
 
 .level-text {
   font-family: "New Rocker", cursive;
   text-align: center;
-}
+} */
 
 .game-area {
   grid-area: 1/1/2/3;
@@ -175,7 +176,7 @@ span {
   padding-left: 10px;
 }
 
-.time {
+.qn-num {
   font-family: "New Rocker", cursive;
   font-size: 1.5rem;
   display: inline-block;
