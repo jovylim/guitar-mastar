@@ -5,6 +5,7 @@ let userAnsL1 = "";
 let userAnsL2 = [];
 let randomChord = 0;
 let currentChord = {};
+let currentScore = 0;
 const stringNames = ["E", "A", "D", "G", "B", "E2"];
 const chordCollection = [
   {
@@ -109,14 +110,13 @@ const level1SubmitButton = document.querySelector(".level1-submit-button");
 level1SubmitButton.addEventListener("click", function (e) {
   e.preventDefault();
   userAnsL1 = document.querySelector("#text-input").value;
-  checkAnsL1P();
+  checkAnsL1();
 });
 
 const level2SubmitButton = document.querySelector(".level2-submit-button");
 level2SubmitButton.addEventListener("click", function (e) {
   e.preventDefault();
-  console.log("submut 2 pressed");
-  checkAnsL2P();
+  checkAnsL2();
 });
 
 const level1Button = document.querySelector("#level-1");
@@ -159,13 +159,26 @@ function runPracticeMode() {
   document.querySelector(".current-game-mode").innerHTML =
     "Current Game Mode: Practice";
   if (currLevel === 1) {
-    levelOnePracMode();
+    levelOneMode();
   } else if (currLevel === 2) {
-    levelTwoPracMode();
+    levelTwoMode();
   }
 }
 
-function levelOnePracMode() {
+function runChallengeMode() {
+  document.querySelector(".current-game-mode").innerHTML =
+    "Current Game Mode: Challenge<br />";
+  currentScore = 0;
+  document.querySelector(".score").innerHTML = `Current Score: ${currentScore}`;
+  document.querySelector(".time").innerHTML = "Time Left: 60";
+  if (currLevel === 1) {
+    levelOneMode();
+  } else if (currLevel === 2) {
+    levelTwoMode();
+  }
+}
+
+function levelOneMode() {
   randomChord = Math.floor(Math.random() * chordCollection.length);
   currentChord = chordCollection[randomChord];
   for (i = 0; i < 6; i++) {
@@ -177,36 +190,48 @@ function levelOnePracMode() {
   }
 }
 
-function checkAnsL1P() {
+function levelTwoMode() {
+  clearFretboard();
+  clearOpenMute();
+  userAnsL2 = [];
+  randomChord = Math.floor(Math.random() * chordCollection.length);
+  currentChord = chordCollection[randomChord];
+  document.querySelector(
+    ".identify"
+  ).innerHTML = `Identify: ${currentChord.name}`;
+}
+
+function checkAnsL1() {
   if (userAnsL1 === currentChord.name) {
     for (x of currentChord.notes) {
       document.querySelector(`#${x}`).innerHTML = "";
     }
     document.querySelector("#text-input").value = "";
     document.querySelector(".wrong").innerHTML = "correct! next one...";
-    runPracticeMode();
+    if (currMode === "challenge-mode") {
+      currentScore += 1;
+      document.querySelector(
+        ".score"
+      ).innerHTML = `Current Score: ${currentScore}`;
+    }
+    levelOneMode();
   } else {
-    document.querySelector(".wrong").innerHTML =
-      "wrong! try again! ps: this is a caps sensitive game";
-    document.querySelector("#text-input").value = "";
+    if (currMode === "challenge-mode") {
+      document.querySelector(".wrong").innerHTML = "wrong! next qn!";
+      for (x of currentChord.notes) {
+        document.querySelector(`#${x}`).innerHTML = "";
+      }
+      document.querySelector("#text-input").value = "";
+      levelOneMode();
+    } else {
+      document.querySelector(".wrong").innerHTML =
+        "wrong! try again! ps: this is a caps sensitive game";
+      document.querySelector("#text-input").value = "";
+    }
   }
 }
 
-function levelTwoPracMode() {
-  console.log("here");
-  clearFretboard();
-  clearOpenMute();
-  userAnsL2 = [];
-  randomChord = Math.floor(Math.random() * chordCollection.length);
-  currentChord = chordCollection[randomChord];
-  console.log(currentChord);
-  document.querySelector(
-    ".identify"
-  ).innerHTML = `Identify: ${currentChord.name}`;
-}
-
-function checkAnsL2P() {
-  console.log("checking l2p ans...");
+function checkAnsL2() {
   let xoCorrect = false;
   let notesCorrect = false;
   for (i = 0; i < 6; i++) {
@@ -223,13 +248,9 @@ function checkAnsL2P() {
       xoCorrect = true;
     }
   }
-  console.log(userAnsL2);
   if (userAnsL2.length === currentChord.notes.length) {
-    console.log("same len");
     const userAnsSorted = [...userAnsL2].sort();
     const correctAnsSorted = [...currentChord.notes].sort();
-    console.log(userAnsSorted);
-    console.log(correctAnsSorted);
     for (i = 0; i < userAnsL2.length; i++) {
       if (userAnsSorted[i] !== correctAnsSorted[i]) {
         break;
@@ -242,21 +263,23 @@ function checkAnsL2P() {
     }
   }
   if (xoCorrect && notesCorrect) {
-    console.log("strings and notes correct");
     document.querySelector(".wrong").innerHTML = "correct! next one...";
-    runPracticeMode();
+    if (currMode === "challenge-mode") {
+      currentScore += 1;
+      document.querySelector(
+        ".score"
+      ).innerHTML = `Current Score: ${currentScore}`;
+    }
+    levelTwoMode();
   } else {
-    console.log("nope");
-    document.querySelector(".wrong").innerHTML =
-      "wrong! try again! ps: did you indicate the X O of the strings?";
+    if (currMode === "challenge-mode") {
+      document.querySelector(".wrong").innerHTML = "wrong! next qn!";
+      levelTwoMode();
+    } else {
+      document.querySelector(".wrong").innerHTML =
+        "wrong! try again! ps: did you indicate the X O of the strings?";
+    }
   }
-}
-
-function runChallengeMode() {
-  document.querySelector(".current-game-mode").innerHTML =
-    "Current Game Mode: Challenge<br />";
-  document.querySelector(".score").innerHTML = "Current Score: 0";
-  document.querySelector(".time").innerHTML = "Time Left: 60";
 }
 
 function newChallengeGame() {
@@ -270,6 +293,9 @@ function backToModeScreen() {
   document.querySelector("#challenge-mode-choosing-inactive").id =
     "challenge-mode";
   hideInputArea();
+  currLevel = 1;
+  document.querySelector(".current-game-level").innerHTML =
+    "Current Level: Level 1 (from the finger pattern, identify the correct chord.)";
 }
 
 function hideInputArea() {
@@ -295,6 +321,7 @@ function clearFretboard() {
 }
 
 function hideInputAreaDepending() {
+  document.querySelector(".wrong").innerHTML = "";
   if (currLevel === 1) {
     document.querySelector("#text-input").value = "";
     document.querySelector("#text-input").id = "text-input-hidden";
