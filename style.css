@@ -80,12 +80,6 @@ span {
   font-size: 0px;
 }
 
-#submit-button-hidden {
-  font-size: 0px;
-  border-width: 0px;
-  padding: 0;
-}
-
 #text-input {
   padding: 1%;
   font-size: 1rem;
@@ -99,7 +93,13 @@ span {
   font-size: 1.5rem;
 }
 
-#submit-button {
+#level1-submit-button-hidden {
+  font-size: 0px;
+  border-width: 0px;
+  padding: 0;
+}
+
+#level1-submit-button {
   padding: 1%;
   font-size: 1rem;
   border: solid black 3px;
@@ -107,7 +107,25 @@ span {
   font-family: "New Rocker", cursive;
 }
 
-#submit-button:hover {
+#level1-submit-button:hover {
+  cursor: pointer;
+}
+
+#level2-submit-button-hidden {
+  font-size: 0px;
+  border-width: 0px;
+  padding: 0;
+}
+
+#level2-submit-button {
+  padding: 1%;
+  font-size: 1rem;
+  border: solid black 3px;
+  border-radius: 5px;
+  font-family: "New Rocker", cursive;
+}
+
+#level2-submit-button:hover {
   cursor: pointer;
 }
 
@@ -217,6 +235,12 @@ span {
 }
 
 .fret {
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.fret-selected {
   font-family: "Be Vietnam Pro", sans-serif;
   font-size: 1.5em;
   text-align: center;

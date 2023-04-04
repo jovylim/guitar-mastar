@@ -1,6 +1,8 @@
 let inGame = false;
 let currMode = "";
 let currLevel = 1; // default level is 1
+let userAnsL1 = "";
+let userAnsL2 = [];
 const stringNames = ["E", "A", "D", "G", "B", "E2"];
 const chordCollection = [
   {
@@ -33,7 +35,12 @@ const chooseModeScreen = document.querySelector("#screen");
 chooseModeScreen.addEventListener("click", function (e) {
   e.preventDefault();
   const modeChosen = e.target.getAttribute("id");
-  currMode = modeChosen;
+  if (modeChosen === "practice-mode") {
+    currMode = modeChosen;
+  }
+  if (modeChosen === "challenge-mode") {
+    currMode = modeChosen;
+  }
 
   if (!inGame) {
     document.querySelector("#practice-mode").id =
@@ -42,7 +49,8 @@ chooseModeScreen.addEventListener("click", function (e) {
       "challenge-mode-choosing-inactive";
     document.querySelector(".level-text-hidden").className = "level-text";
     document.querySelector("#text-input-hidden").id = "text-input";
-    document.querySelector("#submit-button-hidden").id = "submit-button";
+    document.querySelector("#level1-submit-button-hidden").id =
+      "level1-submit-button";
   }
 
   for (let button of document.querySelectorAll(
@@ -62,6 +70,17 @@ chooseModeScreen.addEventListener("click", function (e) {
 const guitarArea = document.querySelector(".guitar-area");
 guitarArea.addEventListener("click", function (e) {
   let fretID = e.target.getAttribute("id");
+  if (currLevel === 2) {
+    if (e.target.className === "fret-selected") {
+      e.target.innerHTML = "";
+      userAnsL2.splice(userAnsL2.indexOf(fretID), 1);
+      e.target.className = "fret";
+    } else if (e.target.className === "fret") {
+      userAnsL2.push(fretID);
+      e.target.className = "fret-selected";
+      e.target.innerHTML = "O";
+    }
+  }
 });
 
 const changeModeButton = document.querySelector("#choose-mode-button");
@@ -69,19 +88,28 @@ changeModeButton.addEventListener("click", function (e) {
   backToModeScreen();
 });
 
-const submitButton = document.querySelector(".submit-button");
-let userAns = "";
-submitButton.addEventListener("click", function (e) {
+const level1SubmitButton = document.querySelector(".level1-submit-button");
+level1SubmitButton.addEventListener("click", function (e) {
   e.preventDefault();
-  userAns = document.querySelector("#text-input").value;
-  checkAns();
+  userAnsL1 = document.querySelector("#text-input").value;
+  checkAnsL1P();
+});
+
+const level2SubmitButton = document.querySelector(".level2-submit-button");
+level2SubmitButton.addEventListener("click", function (e) {
+  e.preventDefault();
+  console.log("submut 2 pressed");
 });
 
 const level1Button = document.querySelector("#level-1");
 level1Button.addEventListener("click", function (e) {
   e.preventDefault();
   clearFretboard();
+  hideInputAreaDepending();
   currLevel = 1;
+  showInputAreaDepending();
+  document.querySelector(".current-game-level").innerHTML =
+    "Current Level: Level 1 (from the finger pattern, identify the correct chord.)";
   if (currMode === "practice-mode") {
     runPracticeMode();
   } else if (currMode === "challenge-mode") {
@@ -93,7 +121,13 @@ const level2Button = document.querySelector("#level-2");
 level2Button.addEventListener("click", function (e) {
   e.preventDefault();
   clearFretboard();
+  clearOpenMute();
+  hideInputAreaDepending();
   currLevel = 2;
+  showInputAreaDepending();
+  userAnsL2 = [];
+  document.querySelector(".current-game-level").innerHTML =
+    "Current Level: Level 2 (from the given chord, identify the correct finger pattern.)";
   if (currMode === "practice-mode") {
     runPracticeMode();
   } else if (currMode === "challenge-mode") {
@@ -108,10 +142,6 @@ function runPracticeMode() {
     "Current Game Mode: Practice";
   if (currLevel === 1) {
     levelOnePracMode();
-
-    // hideInputArea();
-    // document.querySelector(".wrong").innerHTML =
-    //   "you have practiced long enough... advance to level 2?";
   } else if (currLevel === 2) {
     levelTwoPracMode();
   }
@@ -129,8 +159,8 @@ function levelOnePracMode() {
   }
 }
 
-function checkAns() {
-  if (userAns === currentChord.name) {
+function checkAnsL1P() {
+  if (userAnsL1 === currentChord.name) {
     for (x of currentChord.notes) {
       document.querySelector(`#${x}`).innerHTML = "";
     }
@@ -168,18 +198,51 @@ function backToModeScreen() {
 
 function hideInputArea() {
   document.querySelector(".level-text").className = "level-text-hidden";
-  document.querySelector("#text-input").value = "";
-  document.querySelector("#text-input").id = "text-input-hidden";
-  document.querySelector("#submit-button").id = "submit-button-hidden";
   document.querySelector(".wrong").innerHTML = "";
+  document.querySelector(".score").innerHTML = "";
+  document.querySelector(".time").innerHTML = "";
   for (let button of document.querySelectorAll(".material-symbols-rounded")) {
     button.className = "material-symbols-rounded-hidden";
   }
   clearFretboard();
+  hideInputAreaDepending();
 }
 
 function clearFretboard() {
   for (let fret of document.querySelectorAll(".fret")) {
     fret.innerHTML = "";
+  }
+  for (let fret of document.querySelectorAll(".fret-selected")) {
+    fret.innerHTML = "";
+    fret.className = "fret";
+  }
+}
+
+function hideInputAreaDepending() {
+  if (currLevel === 1) {
+    document.querySelector("#text-input").value = "";
+    document.querySelector("#text-input").id = "text-input-hidden";
+    document.querySelector("#level1-submit-button").id =
+      "level1-submit-button-hidden";
+  } else if (currLevel === 2) {
+    document.querySelector("#level2-submit-button").id =
+      "level2-submit-button-hidden";
+  }
+}
+
+function showInputAreaDepending() {
+  if (currLevel === 1) {
+    document.querySelector("#text-input-hidden").id = "text-input";
+    document.querySelector("#level1-submit-button-hidden").id =
+      "level1-submit-button";
+  } else if (currLevel === 2) {
+    document.querySelector("#level2-submit-button-hidden").id =
+      "level2-submit-button";
+  }
+}
+
+function clearOpenMute() {
+  for (i = 0; i < 6; i++) {
+    document.querySelector(`#mute-or-open-${stringNames[i]}`).innerHTML = "-";
   }
 }
