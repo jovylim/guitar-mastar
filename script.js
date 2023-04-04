@@ -3,6 +3,8 @@ let currMode = "";
 let currLevel = 1; // default level is 1
 let userAnsL1 = "";
 let userAnsL2 = [];
+let randomChord = 0;
+let currentChord = {};
 const stringNames = ["E", "A", "D", "G", "B", "E2"];
 const chordCollection = [
   {
@@ -26,8 +28,6 @@ const chordCollection = [
     notes: ["A2", "D2"],
   },
 ];
-let randomChord = 0;
-let currentChord = chordCollection[randomChord];
 
 ////////// event listeners
 
@@ -69,6 +69,7 @@ chooseModeScreen.addEventListener("click", function (e) {
 
 const guitarArea = document.querySelector(".guitar-area");
 guitarArea.addEventListener("click", function (e) {
+  e.preventDefault();
   let fretID = e.target.getAttribute("id");
   if (currLevel === 2) {
     if (e.target.className === "fret-selected") {
@@ -79,6 +80,22 @@ guitarArea.addEventListener("click", function (e) {
       userAnsL2.push(fretID);
       e.target.className = "fret-selected";
       e.target.innerHTML = "O";
+    }
+  }
+});
+
+const xoButtons = document.querySelector(".mute-or-open");
+xoButtons.addEventListener("click", function (e) {
+  e.preventDefault();
+  if (currLevel === 2) {
+    if (e.target.innerHTML === "?") {
+      e.target.innerHTML = "X";
+    } else if (e.target.innerHTML === "X") {
+      e.target.innerHTML = "O";
+    } else if (e.target.innerHTML === "O") {
+      e.target.innerHTML = "";
+    } else if (e.target.innerHTML === "") {
+      e.target.innerHTML = "?";
     }
   }
 });
@@ -99,6 +116,7 @@ const level2SubmitButton = document.querySelector(".level2-submit-button");
 level2SubmitButton.addEventListener("click", function (e) {
   e.preventDefault();
   console.log("submut 2 pressed");
+  checkAnsL2P();
 });
 
 const level1Button = document.querySelector("#level-1");
@@ -174,7 +192,65 @@ function checkAnsL1P() {
   }
 }
 
-function levelTwoPracMode() {}
+function levelTwoPracMode() {
+  console.log("here");
+  clearFretboard();
+  clearOpenMute();
+  userAnsL2 = [];
+  randomChord = Math.floor(Math.random() * chordCollection.length);
+  currentChord = chordCollection[randomChord];
+  console.log(currentChord);
+  document.querySelector(
+    ".identify"
+  ).innerHTML = `Identify: ${currentChord.name}`;
+}
+
+function checkAnsL2P() {
+  console.log("checking l2p ans...");
+  let xoCorrect = false;
+  let notesCorrect = false;
+  for (i = 0; i < 6; i++) {
+    if (
+      document.querySelector(`#mute-or-open-${stringNames[i]}`).innerHTML !==
+      currentChord.strings[i]
+    ) {
+      break;
+    } else if (
+      i === 5 &&
+      document.querySelector(`#mute-or-open-${stringNames[i]}`).innerHTML ===
+        currentChord.strings[i]
+    ) {
+      xoCorrect = true;
+    }
+  }
+  console.log(userAnsL2);
+  if (userAnsL2.length === currentChord.notes.length) {
+    console.log("same len");
+    const userAnsSorted = [...userAnsL2].sort();
+    const correctAnsSorted = [...currentChord.notes].sort();
+    console.log(userAnsSorted);
+    console.log(correctAnsSorted);
+    for (i = 0; i < userAnsL2.length; i++) {
+      if (userAnsSorted[i] !== correctAnsSorted[i]) {
+        break;
+      } else if (
+        i === userAnsL2.length - 1 &&
+        userAnsSorted[i] === correctAnsSorted[i]
+      ) {
+        notesCorrect = true;
+      }
+    }
+  }
+  if (xoCorrect && notesCorrect) {
+    console.log("strings and notes correct");
+    document.querySelector(".wrong").innerHTML = "correct! next one...";
+    runPracticeMode();
+  } else {
+    console.log("nope");
+    document.querySelector(".wrong").innerHTML =
+      "wrong! try again! ps: did you indicate the X O of the strings?";
+  }
+}
 
 function runChallengeMode() {
   document.querySelector(".current-game-mode").innerHTML =
@@ -227,6 +303,7 @@ function hideInputAreaDepending() {
   } else if (currLevel === 2) {
     document.querySelector("#level2-submit-button").id =
       "level2-submit-button-hidden";
+    document.querySelector(".identify").className = "identify-hidden";
   }
 }
 
@@ -238,11 +315,12 @@ function showInputAreaDepending() {
   } else if (currLevel === 2) {
     document.querySelector("#level2-submit-button-hidden").id =
       "level2-submit-button";
+    document.querySelector(".identify-hidden").className = "identify";
   }
 }
 
 function clearOpenMute() {
   for (i = 0; i < 6; i++) {
-    document.querySelector(`#mute-or-open-${stringNames[i]}`).innerHTML = "-";
+    document.querySelector(`#mute-or-open-${stringNames[i]}`).innerHTML = "?";
   }
 }

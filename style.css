@@ -198,6 +198,10 @@ span {
   font-family: "Metal Mania", cursive;
 }
 
+.mute-or-open:hover {
+  cursor: pointer;
+}
+
 .xo {
   text-align: center;
   padding: 20% 0;
