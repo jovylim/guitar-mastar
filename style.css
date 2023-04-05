@@ -143,15 +143,6 @@ span {
   padding-left: 20px;
 }
 
-/* .level-text-hidden {
-  font-size: 0px;
-}
-
-.level-text {
-  font-family: "New Rocker", cursive;
-  text-align: center;
-} */
-
 .game-area {
   grid-area: 1/1/2/3;
   background-color: white;
@@ -205,7 +196,8 @@ span {
 
 .xo {
   text-align: center;
-  padding: 20% 0;
+  padding: 7% 0;
+  font-size: 1.5rem;
 }
 
 .guitar-area {

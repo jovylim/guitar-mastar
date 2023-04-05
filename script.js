@@ -1,6 +1,6 @@
 let inGame = false;
 let currMode = "";
-let currLevel = 1; // default level is 1
+let currLevel = 1;
 let userAnsL1 = "";
 let userAnsL2 = [];
 let randomChord = 0;
@@ -84,7 +84,6 @@ chooseModeScreen.addEventListener("click", function (e) {
       "practice-mode-choosing-inactive";
     document.querySelector("#challenge-mode").id =
       "challenge-mode-choosing-inactive";
-    // document.querySelector(".level-text-hidden").className = "level-text";
     document.querySelector("#text-input-hidden").id = "text-input";
     document.querySelector("#level1-submit-button-hidden").id =
       "level1-submit-button";
