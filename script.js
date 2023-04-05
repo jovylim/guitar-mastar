@@ -8,61 +8,83 @@ let currentChord = {};
 let currentScore = 0;
 let currentQnNum = 1;
 const stringNames = ["E", "A", "D", "G", "B", "E2"];
+let GSound = new Audio("sounds/G.wav");
+let AmSound = new Audio("sounds/Am.wav");
+let ASound = new Audio("sounds/A.wav");
+let BmSound = new Audio("sounds/Bm.wav");
+let BSound = new Audio("sounds/B.wav");
+let CSound = new Audio("sounds/C.wav");
+let DSound = new Audio("sounds/D.wav");
+let DmSound = new Audio("sounds/Dm.wav");
+let ESound = new Audio("sounds/E.wav");
+let EmSound = new Audio("sounds/Em.wav");
+let FSound = new Audio("sounds/F.wav");
 const chordCollection = [
   {
     name: "G",
     strings: ["", "", "O", "O", "O", ""],
     notes: ["E3", "A2", "E2-3"],
+    sound: GSound,
   },
   {
     name: "Am",
     strings: ["X", "O", "", "", "", "O"],
     notes: ["D2", "G2", "B1"],
+    sound: AmSound,
   },
   {
     name: "A",
     strings: ["X", "O", "", "", "", "O"],
     notes: ["D2", "G2", "B2"],
+    sound: ASound,
   },
   {
     name: "Bm",
     strings: ["X", "", "", "", "", ""],
     notes: ["A2", "D4", "G4", "B3", "E2-2"],
+    sound: BmSound,
   },
   {
     name: "B",
     strings: ["X", "", "", "", "", ""],
     notes: ["A2", "D4", "G4", "B4", "E2-2"],
+    sound: BSound,
   },
   {
     name: "C",
     strings: ["X", "", "", "O", "", "O"],
     notes: ["A3", "D2", "B1"],
+    sound: CSound,
   },
   {
     name: "D",
     strings: ["X", "X", "O", "", "", ""],
     notes: ["G2", "B3", "E2-2"],
+    sound: DSound,
   },
   {
     name: "Dm",
     strings: ["X", "X", "O", "", "", ""],
     notes: ["G2", "B3", "E2-1"],
+    sound: DmSound,
   },
   {
     name: "E",
     strings: ["O", "", "", "", "O", "O"],
     notes: ["A2", "D2", "G1"],
+    sound: ESound,
   },
   {
     name: "Em",
     strings: ["O", "", "", "O", "O", "O"],
     notes: ["A2", "D2"],
+    sound: EmSound,
   },
   {
     name: "F",
     strings: ["", "", "", "", "", ""],
     notes: ["E1", "A3", "D3", "G2", "B1", "E2-1"],
+    sound: FSound,
   },
 ];
 
@@ -194,6 +216,12 @@ level2Button.addEventListener("click", function (e) {
   } else if (currMode === "challenge-mode") {
     runChallengeMode();
   }
+});
+
+const soundButton = document.querySelector("#sound");
+soundButton.addEventListener("click", function (e) {
+  e.preventDefault();
+  currentChord.sound.play();
 });
 
 ///////////fns
