@@ -15,6 +15,26 @@ const chordCollection = [
     notes: ["E3", "A2", "E2-3"],
   },
   {
+    name: "Am",
+    strings: ["X", "O", "", "", "", "O"],
+    notes: ["D2", "G2", "B1"],
+  },
+  {
+    name: "A",
+    strings: ["X", "O", "", "", "", "O"],
+    notes: ["D2", "G2", "B2"],
+  },
+  {
+    name: "Bm",
+    strings: ["X", "", "", "", "", ""],
+    notes: ["A2", "D4", "G4", "B3", "E2-2"],
+  },
+  {
+    name: "B",
+    strings: ["X", "", "", "", "", ""],
+    notes: ["A2", "D4", "G4", "B4", "E2-2"],
+  },
+  {
     name: "C",
     strings: ["X", "", "", "O", "", "O"],
     notes: ["A3", "D2", "B1"],
@@ -25,9 +45,24 @@ const chordCollection = [
     notes: ["G2", "B3", "E2-2"],
   },
   {
+    name: "Dm",
+    strings: ["X", "X", "O", "", "", ""],
+    notes: ["G2", "B3", "E2-1"],
+  },
+  {
+    name: "E",
+    strings: ["O", "", "", "", "O", "O"],
+    notes: ["A2", "D2", "G1"],
+  },
+  {
     name: "Em",
     strings: ["O", "", "", "O", "O", "O"],
     notes: ["A2", "D2"],
+  },
+  {
+    name: "F",
+    strings: ["", "", "", "", "", ""],
+    notes: ["E1", "A3", "D3", "G2", "B1", "E2-1"],
   },
 ];
 
@@ -146,13 +181,11 @@ level2Button.addEventListener("click", function (e) {
   e.preventDefault();
   clearFretboard();
   clearOpenMute();
-  if (currLevel !== 2 && currentQnNum !== 11) {
+  if (currentQnNum !== 11) {
     hideInputAreaDepending();
   }
-  if (currLevel !== 2) {
-    currLevel = 2;
-    showInputAreaDepending();
-  }
+  currLevel = 2;
+  showInputAreaDepending();
   document.querySelector(".wrong").innerHTML = "";
   userAnsL2 = [];
   document.querySelector(".current-game-level").innerHTML =
@@ -385,10 +418,12 @@ function clearFretboard() {
 function hideInputAreaDepending() {
   document.querySelector(".wrong").innerHTML = "";
   if (currLevel === 1) {
-    document.querySelector("#text-input").value = "";
-    document.querySelector("#text-input").id = "text-input-hidden";
-    document.querySelector("#level1-submit-button").id =
-      "level1-submit-button-hidden";
+    if (currentQnNum !== 11) {
+      document.querySelector("#text-input").value = "";
+      document.querySelector("#text-input").id = "text-input-hidden";
+      document.querySelector("#level1-submit-button").id =
+        "level1-submit-button-hidden";
+    }
   } else if (currLevel === 2) {
     document.querySelector("#level2-submit-button").id =
       "level2-submit-button-hidden";
