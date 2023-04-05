@@ -111,7 +111,7 @@ guitarArea.addEventListener("click", function (e) {
     } else if (e.target.className === "fret") {
       userAnsL2.push(fretID);
       e.target.className = "fret-selected";
-      e.target.innerHTML = "O";
+      e.target.innerHTML = "⏺";
     }
   }
 });
@@ -230,7 +230,7 @@ function levelOneMode() {
       currentChord.strings[i];
   }
   for (x of currentChord.notes) {
-    document.querySelector(`#${x}`).innerHTML = "O";
+    document.querySelector(`#${x}`).innerHTML = "⏺";
   }
 }
 
