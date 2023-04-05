@@ -72,12 +72,6 @@ const chooseModeScreen = document.querySelector("#screen");
 chooseModeScreen.addEventListener("click", function (e) {
   e.preventDefault();
   const modeChosen = e.target.getAttribute("id");
-  if (modeChosen === "practice-mode") {
-    currMode = modeChosen;
-  }
-  if (modeChosen === "challenge-mode") {
-    currMode = modeChosen;
-  }
 
   if (!inGame) {
     document.querySelector("#practice-mode").id =
@@ -96,8 +90,10 @@ chooseModeScreen.addEventListener("click", function (e) {
   }
 
   if (modeChosen === "practice-mode") {
+    currMode = modeChosen; // this had to be put here because of fret clicky id issue
     runPracticeMode();
   } else if (modeChosen === "challenge-mode") {
+    currMode = modeChosen;
     runChallengeMode();
   }
   inGame = true;
@@ -161,10 +157,11 @@ level1Button.addEventListener("click", function (e) {
   if (currLevel !== 1 && currentQnNum !== 11) {
     hideInputAreaDepending();
   }
-  if (currLevel !== 1) {
+  if (currLevel !== 1 || currentQnNum === 11) {
     currLevel = 1;
     showInputAreaDepending();
   }
+
   document.querySelector(".wrong").innerHTML = "";
   document.querySelector(".current-game-level").innerHTML =
     "Current Level: Level 1 (from the finger pattern, identify the correct chord.)";
@@ -180,11 +177,14 @@ level2Button.addEventListener("click", function (e) {
   e.preventDefault();
   clearFretboard();
   clearOpenMute();
-  if (currentQnNum !== 11) {
+  if (currLevel !== 2 && currentQnNum !== 11) {
     hideInputAreaDepending();
   }
-  currLevel = 2;
-  showInputAreaDepending();
+  if (currLevel !== 2 || currentQnNum === 11) {
+    currLevel = 2;
+    showInputAreaDepending();
+  }
+
   document.querySelector(".wrong").innerHTML = "";
   userAnsL2 = [];
   document.querySelector(".current-game-level").innerHTML =
@@ -259,7 +259,6 @@ function checkAnsL1() {
       ).innerHTML = `Current Score: ${currentScore}`;
       currentQnNum += 1;
       if (currentQnNum === 11) {
-        console.log("show res L1 q10 right");
         showResults();
       } else {
         document.querySelector(
@@ -280,7 +279,6 @@ function checkAnsL1() {
       currentQnNum += 1;
 
       if (currentQnNum === 11) {
-        console.log("show res L1 q10 wrong");
         showResults();
       } else {
         document.querySelector(
@@ -336,7 +334,6 @@ function checkAnsL2() {
       ).innerHTML = `Current Score: ${currentScore}`;
       currentQnNum += 1;
       if (currentQnNum === 11) {
-        console.log("show res L2 q10 right");
         showResults();
       } else {
         document.querySelector(
@@ -352,7 +349,6 @@ function checkAnsL2() {
       document.querySelector(".wrong").innerHTML = "wrong! next qn!";
       currentQnNum += 1;
       if (currentQnNum === 11) {
-        console.log("show res L2 q10 wrong");
         showResults();
       } else {
         document.querySelector(
@@ -368,7 +364,6 @@ function checkAnsL2() {
 }
 
 function showResults() {
-  // document.querySelector("#results-hidden").id = "results";
   hideInputAreaDepending();
   if (currentScore === 10) {
     document.querySelector(".wrong").innerHTML =
@@ -393,7 +388,6 @@ function backToModeScreen() {
 }
 
 function hideInputArea() {
-  // document.querySelector(".level-text").className = "level-text-hidden";
   document.querySelector(".wrong").innerHTML = "";
   document.querySelector(".score").innerHTML = "";
   document.querySelector(".qn-num").innerHTML = "";
@@ -401,7 +395,9 @@ function hideInputArea() {
     button.className = "material-symbols-rounded-hidden";
   }
   clearFretboard();
-  hideInputAreaDepending();
+  if (currentQnNum !== 11) {
+    hideInputAreaDepending();
+  }
 }
 
 function clearFretboard() {
@@ -417,12 +413,10 @@ function clearFretboard() {
 function hideInputAreaDepending() {
   document.querySelector(".wrong").innerHTML = "";
   if (currLevel === 1) {
-    if (currentQnNum !== 11) {
-      document.querySelector("#text-input").value = "";
-      document.querySelector("#text-input").id = "text-input-hidden";
-      document.querySelector("#level1-submit-button").id =
-        "level1-submit-button-hidden";
-    }
+    document.querySelector("#text-input").value = "";
+    document.querySelector("#text-input").id = "text-input-hidden";
+    document.querySelector("#level1-submit-button").id =
+      "level1-submit-button-hidden";
   } else if (currLevel === 2) {
     document.querySelector("#level2-submit-button").id =
       "level2-submit-button-hidden";
