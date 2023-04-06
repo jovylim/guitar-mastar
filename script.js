@@ -8,83 +8,83 @@ let currentChord = {};
 let currentScore = 0;
 let currentQnNum = 1;
 const stringNames = ["E", "A", "D", "G", "B", "E2"];
-let GSound = new Audio("sounds/G.wav");
-let AmSound = new Audio("sounds/Am.wav");
-let ASound = new Audio("sounds/A.wav");
-let BmSound = new Audio("sounds/Bm.wav");
-let BSound = new Audio("sounds/B.wav");
-let CSound = new Audio("sounds/C.wav");
-let DSound = new Audio("sounds/D.wav");
-let DmSound = new Audio("sounds/Dm.wav");
-let ESound = new Audio("sounds/E.wav");
-let EmSound = new Audio("sounds/Em.wav");
-let FSound = new Audio("sounds/F.wav");
+let soundG = new Audio("sounds/G.wav");
+let soundAm = new Audio("sounds/Am.wav");
+let soundA = new Audio("sounds/A.wav");
+let soundBm = new Audio("sounds/Bm.wav");
+let soundB = new Audio("sounds/B.wav");
+let soundC = new Audio("sounds/C.wav");
+let soundD = new Audio("sounds/D.wav");
+let soundDm = new Audio("sounds/Dm.wav");
+let soundE = new Audio("sounds/E.wav");
+let soundEm = new Audio("sounds/Em.wav");
+let soundF = new Audio("sounds/F.wav");
 const chordCollection = [
   {
     name: "G",
     strings: ["", "", "O", "O", "O", ""],
     notes: ["E3", "A2", "E2-3"],
-    sound: GSound,
+    sound: soundG,
   },
   {
     name: "Am",
     strings: ["X", "O", "", "", "", "O"],
     notes: ["D2", "G2", "B1"],
-    sound: AmSound,
+    sound: soundAm,
   },
   {
     name: "A",
     strings: ["X", "O", "", "", "", "O"],
     notes: ["D2", "G2", "B2"],
-    sound: ASound,
+    sound: soundA,
   },
   {
     name: "Bm",
     strings: ["X", "", "", "", "", ""],
     notes: ["A2", "D4", "G4", "B3", "E2-2"],
-    sound: BmSound,
+    sound: soundBm,
   },
   {
     name: "B",
     strings: ["X", "", "", "", "", ""],
     notes: ["A2", "D4", "G4", "B4", "E2-2"],
-    sound: BSound,
+    sound: soundB,
   },
   {
     name: "C",
     strings: ["X", "", "", "O", "", "O"],
     notes: ["A3", "D2", "B1"],
-    sound: CSound,
+    sound: soundC,
   },
   {
     name: "D",
     strings: ["X", "X", "O", "", "", ""],
     notes: ["G2", "B3", "E2-2"],
-    sound: DSound,
+    sound: soundD,
   },
   {
     name: "Dm",
     strings: ["X", "X", "O", "", "", ""],
     notes: ["G2", "B3", "E2-1"],
-    sound: DmSound,
+    sound: soundDm,
   },
   {
     name: "E",
     strings: ["O", "", "", "", "O", "O"],
     notes: ["A2", "D2", "G1"],
-    sound: ESound,
+    sound: soundE,
   },
   {
     name: "Em",
     strings: ["O", "", "", "O", "O", "O"],
     notes: ["A2", "D2"],
-    sound: EmSound,
+    sound: soundEm,
   },
   {
     name: "F",
     strings: ["", "", "", "", "", ""],
     notes: ["E1", "A3", "D3", "G2", "B1", "E2-1"],
-    sound: FSound,
+    sound: soundF,
   },
 ];
 
